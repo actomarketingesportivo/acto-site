@@ -228,15 +228,17 @@ body {
   width: 100%; display: block;
   height: auto;
 }
-/* Segundo card: clipa só o espaço vazio do fundo */
+/* Segundo card: container com aspect-ratio = mostra só a área com conteúdo */
 .proof-bento-clip {
   overflow: hidden;
+  aspect-ratio: 800 / 560;
+  position: relative;
 }
 .proof-bento-clip img {
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
   height: auto;
-  display: block;
-  margin-bottom: -13%; /* esconde ~13% do fundo = espaço vazio */
 }
 
 
