@@ -104,8 +104,8 @@ body {
   margin-bottom: 20px;
 }
 .hero-sub {
-  font-size: 15px; color: var(--sub);
-  line-height: 1.7; max-width: 520px;
+  font-size: 18px; color: var(--sub);
+  line-height: 1.75; max-width: 520px;
 }
 .hero-sub strong { color: var(--text); font-weight: 600; }
 
@@ -160,23 +160,21 @@ body {
 }
 
 /* =====================
-   MÉTRICAS — IMPACTO TOTAL
+   BENTO: MÉTRICAS + PROVAS
    ===================== */
-.metrics-wrapper {
-  margin-bottom: 80px;
-}
-
-.metrics {
+.results-bento {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
   gap: 16px;
+  margin-bottom: 80px;
 }
 
 .metric {
   background: var(--card);
   border: 1px solid rgba(0,232,120,.12);
   border-radius: 18px;
-  padding: 32px 24px 28px;
+  padding: 28px 20px 24px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -195,17 +193,17 @@ body {
 }
 
 .m-val {
-  font-size: clamp(24px, 3vw, 42px);
+  font-size: clamp(20px, 2.4vw, 38px);
   font-weight: 900;
   line-height: 1;
   color: var(--green);
   text-shadow: 0 0 40px var(--green-glow), 0 0 80px rgba(0,232,120,.15);
-  margin-bottom: 12px;
-  letter-spacing: -1px;
-  word-break: break-all;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
 }
 .m-lbl {
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255,255,255,.5);
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -213,33 +211,24 @@ body {
   line-height: 1.4;
 }
 
-/* =====================
-   PROVA SOCIAL — WHATSAPP
-   ===================== */
-.social-proof {
-  margin-bottom: 80px;
-}
-.social-proof-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: start;
-}
-.proof-img-wrap {
+/* WA screenshots dentro do bento */
+.proof-bento {
+  grid-column: span 2;
   border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 24px 60px rgba(0,0,0,.5);
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 16px 48px rgba(0,0,0,.5);
   transition: transform .3s, box-shadow .3s;
 }
-.proof-img-wrap:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 32px 80px rgba(0,0,0,.65);
+.proof-bento:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 64px rgba(0,0,0,.65);
 }
-.proof-img-wrap img {
-  width: 100%;
-  display: block;
+.proof-bento img {
+  width: 100%; display: block;
+  object-fit: cover;
 }
+
 
 /* =====================
    SEÇÃO FUNDADOR
@@ -471,8 +460,8 @@ body {
    RESPONSIVE
    ===================== */
 @media (max-width: 960px) {
-  .metrics { grid-template-columns: repeat(2, 1fr); }
-  .social-proof-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .results-bento { grid-template-columns: repeat(2, 1fr); }
+  .proof-bento { grid-column: span 1; }
   .form-grid { grid-template-columns: 1fr; }
   .form-section { padding: 40px 32px 36px; }
   .form-title { font-size: 26px; }
@@ -555,10 +544,12 @@ body {
     </div>
   </section>
 
-  <!-- 2. RESULTADOS -->
-  <div class="metrics-wrapper rv">
+  <!-- 2. RESULTADOS + PROVA SOCIAL (bento unificado) -->
+  <div class="rv">
     <p class="section-label">Os resultados</p>
-    <div class="metrics">
+    <div class="results-bento">
+
+      <!-- Linha 1: 4 métricas -->
       <div class="metric">
         <div class="m-val">523k</div>
         <div class="m-lbl">Visualizações</div>
@@ -575,20 +566,13 @@ body {
         <div class="m-val">+52.000%</div>
         <div class="m-lbl">de cliques para WhatsApp</div>
       </div>
-    </div>
-  </div>
 
-  <!-- PROVA SOCIAL — WHATSAPP -->
-  <div class="social-proof rv">
-    <p class="section-label">O que os clientes dizem</p>
-    <div class="social-proof-grid">
-
-      <div class="proof-img-wrap">
-        <img src="../wa-1.png" alt="Conversa no WhatsApp com o cliente BMU Fitness Center">
+      <!-- Linha 2: prints do WhatsApp (cada um = 2 colunas) -->
+      <div class="proof-bento">
+        <img src="../wa-1.png" alt="Conversa WhatsApp: Desde de novembro? Com certeza.">
       </div>
-
-      <div class="proof-img-wrap">
-        <img src="../wa-2.png" alt="Resultado: matrículas do plano Intense aumentaram consideravelmente">
+      <div class="proof-bento">
+        <img src="../wa-2.png" alt="Conversa WhatsApp: matrículas do plano Intense aumentaram consideravelmente">
       </div>
 
     </div>
