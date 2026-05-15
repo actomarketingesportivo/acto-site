@@ -213,20 +213,21 @@ body {
 
 /* WA screenshots dentro do bento */
 .proof-bento {
-  grid-column: span 2;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.07);
   box-shadow: 0 16px 48px rgba(0,0,0,.5);
   transition: transform .3s, box-shadow .3s;
 }
+.proof-bento-wide { grid-column: span 2; }
+.proof-bento-sm   { grid-column: span 1; }
 .proof-bento:hover {
   transform: translateY(-3px);
   box-shadow: 0 24px 64px rgba(0,0,0,.65);
 }
 .proof-bento img {
   width: 100%; display: block;
-  object-fit: cover;
+  object-fit: cover; height: 100%;
 }
 
 
@@ -461,7 +462,7 @@ body {
    ===================== */
 @media (max-width: 960px) {
   .results-bento { grid-template-columns: repeat(2, 1fr); }
-  .proof-bento { grid-column: span 1; }
+  .proof-bento-wide, .proof-bento-sm { grid-column: span 2; }
   .form-grid { grid-template-columns: 1fr; }
   .form-section { padding: 40px 32px 36px; }
   .form-title { font-size: 26px; }
@@ -567,12 +568,16 @@ body {
         <div class="m-lbl">de cliques para WhatsApp</div>
       </div>
 
-      <!-- Linha 2: prints do WhatsApp (cada um = 2 colunas) -->
-      <div class="proof-bento">
+      <!-- Linha 2: prints do WhatsApp -->
+      <!-- wa-1 ocupa 2 cols, wa-2 e wa-3 ocupam 1 col cada -->
+      <div class="proof-bento proof-bento-wide">
         <img src="../wa-1.png" alt="Conversa WhatsApp: Desde de novembro? Com certeza.">
       </div>
-      <div class="proof-bento">
+      <div class="proof-bento proof-bento-sm">
         <img src="../wa-2.png" alt="Conversa WhatsApp: matrículas do plano Intense aumentaram consideravelmente">
+      </div>
+      <div class="proof-bento proof-bento-sm">
+        <img src="../wa-3.png" alt="Conversa WhatsApp: Temos recebido contatos via WhatsApp diariamente">
       </div>
 
     </div>
