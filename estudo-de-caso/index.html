@@ -117,8 +117,8 @@ body {
 }
 .video-wrap {
   position: relative;
-  height: min(88vh, 780px);
-  width: calc(min(88vh, 780px) * 9 / 16);
+  width: clamp(280px, 38vw, 440px);
+  height: auto;
   background: #0c0c0f;
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -134,7 +134,7 @@ body {
 vturb-smartplayer {
   display: block !important;
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
 }
 .video-placeholder {
   position: absolute; inset: 0;
