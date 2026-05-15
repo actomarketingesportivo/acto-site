@@ -563,19 +563,19 @@ body {
 
       <!-- Linha 1: 4 métricas -->
       <div class="metric">
-        <div class="m-val">523k</div>
+        <div class="m-val" data-count="523" data-suffix="k">0k</div>
         <div class="m-lbl">Visualizações</div>
       </div>
       <div class="metric">
-        <div class="m-val">+1.000%</div>
+        <div class="m-val" data-count="1000" data-prefix="+" data-suffix="%" data-thousands="true">0%</div>
         <div class="m-lbl">de alcance</div>
       </div>
       <div class="metric">
-        <div class="m-val">+1.200%</div>
+        <div class="m-val" data-count="1200" data-prefix="+" data-suffix="%" data-thousands="true">0%</div>
         <div class="m-lbl">de interações</div>
       </div>
       <div class="metric">
-        <div class="m-val">+52.000%</div>
+        <div class="m-val" data-count="52000" data-prefix="+" data-suffix="%" data-thousands="true">0%</div>
         <div class="m-lbl">de cliques para WhatsApp</div>
       </div>
 
@@ -691,6 +691,44 @@ document.querySelectorAll('.rv').forEach((el, i) => {
   el.style.transitionDelay = Math.min(i * 0.06, 0.45) + 's';
   obs.observe(el);
 });
+
+// COUNT-UP ANIMATION
+function formatNum(n, thousands) {
+  if (thousands) return n.toLocaleString('pt-BR'); // 1.000 / 52.000
+  return n;
+}
+
+function animateCount(el) {
+  const target   = parseInt(el.dataset.count);
+  const prefix   = el.dataset.prefix || '';
+  const suffix   = el.dataset.suffix || '';
+  const thousands = el.dataset.thousands === 'true';
+  const duration = 1800; // ms
+  const start    = performance.now();
+
+  function ease(t) { return 1 - Math.pow(1 - t, 3); } // cubic ease-out
+
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const value = Math.round(ease(progress) * target);
+    el.textContent = prefix + formatNum(value, thousands) + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCount(e.target);
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+
+document.querySelectorAll('.m-val[data-count]').forEach(el => countObs.observe(el));
 
 const form = document.getElementById('vsl-form');
 const btn = document.getElementById('vsl-btn');
