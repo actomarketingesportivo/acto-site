@@ -195,13 +195,14 @@ body {
 }
 
 .m-val {
-  font-size: 42px;
+  font-size: clamp(24px, 3vw, 42px);
   font-weight: 900;
   line-height: 1;
   color: var(--green);
   text-shadow: 0 0 40px var(--green-glow), 0 0 80px rgba(0,232,120,.15);
   margin-bottom: 12px;
   letter-spacing: -1px;
+  word-break: break-all;
 }
 .m-lbl {
   font-size: 12px;
@@ -221,68 +222,24 @@ body {
 .social-proof-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 24px;
+  align-items: start;
 }
-.proof-card {
-  background: var(--card);
-  border: 1px solid var(--border);
+.proof-img-wrap {
   border-radius: 18px;
-  padding: 32px;
-  position: relative;
   overflow: hidden;
-  transition: border-color .3s;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 24px 60px rgba(0,0,0,.5);
+  transition: transform .3s, box-shadow .3s;
 }
-.proof-card:hover { border-color: var(--border-h); }
-.proof-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+.proof-img-wrap:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 80px rgba(0,0,0,.65);
 }
-
-.proof-source {
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 20px;
+.proof-img-wrap img {
+  width: 100%;
+  display: block;
 }
-.proof-source-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #25d366;
-  box-shadow: 0 0 8px rgba(37,211,102,.6);
-  flex-shrink: 0;
-}
-.proof-source-label {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: rgba(255,255,255,.3);
-}
-
-.proof-bubbles {
-  display: flex; flex-direction: column; gap: 10px;
-}
-
-.bubble {
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 90%;
-}
-.bubble-received {
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 4px 12px 12px 12px;
-  color: rgba(255,255,255,.85);
-  align-self: flex-start;
-}
-.bubble-sent {
-  background: rgba(26,58,106,.5);
-  border: 1px solid rgba(26,58,106,.8);
-  border-radius: 12px 4px 12px 12px;
-  color: rgba(255,255,255,.85);
-  align-self: flex-end;
-  text-align: right;
-}
-.bubble strong { color: #fff; }
-.bubble-received strong { color: var(--green); }
 
 /* =====================
    SEÇÃO FUNDADOR
@@ -515,7 +472,7 @@ body {
    ===================== */
 @media (max-width: 960px) {
   .metrics { grid-template-columns: repeat(2, 1fr); }
-  .social-proof-grid { grid-template-columns: 1fr; }
+  .social-proof-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
   .form-grid { grid-template-columns: 1fr; }
   .form-section { padding: 40px 32px 36px; }
   .form-title { font-size: 26px; }
@@ -623,32 +580,15 @@ body {
 
   <!-- PROVA SOCIAL — WHATSAPP -->
   <div class="social-proof rv">
-    <p class="section-label">O que o cliente diz</p>
+    <p class="section-label">O que os clientes dizem</p>
     <div class="social-proof-grid">
 
-      <div class="proof-card">
-        <div class="proof-source">
-          <div class="proof-source-dot"></div>
-          <span class="proof-source-label">Conversa no WhatsApp</span>
-        </div>
-        <div class="proof-bubbles">
-          <div class="bubble bubble-sent">Você sentiu que a procura aumentou desde que começamos a trabalhar a presença digital da BMU?</div>
-          <div class="bubble bubble-received"><strong>Desde de novembro? Com certeza.</strong><br>Sem sombra de dúvidas.</div>
-          <div class="bubble bubble-received">O Intense, que é um plano mais caro, tinha uma procura mais baixa. Depois que a divulgação começou, as matrículas aumentaram consideravelmente.</div>
-        </div>
+      <div class="proof-img-wrap">
+        <img src="../wa-1.png" alt="Conversa no WhatsApp com o cliente BMU Fitness Center">
       </div>
 
-      <div class="proof-card">
-        <div class="proof-source">
-          <div class="proof-source-dot"></div>
-          <span class="proof-source-label">Conversa no WhatsApp</span>
-        </div>
-        <div class="proof-bubbles">
-          <div class="bubble bubble-sent">Esse último mês tivemos bons números, mais da metade das visualizações acontecendo no orgânico. O caminho é esse!</div>
-          <div class="bubble bubble-received">Sim, está indo bem.</div>
-          <div class="bubble bubble-received"><strong>Temos recebido contatos via WhatsApp diariamente.</strong></div>
-          <div class="bubble bubble-sent">Perfeito! O objetivo final é esse.</div>
-        </div>
+      <div class="proof-img-wrap">
+        <img src="../wa-2.png" alt="Resultado: matrículas do plano Intense aumentaram consideravelmente">
       </div>
 
     </div>
