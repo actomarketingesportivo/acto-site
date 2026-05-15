@@ -64,7 +64,7 @@ body {
 }
 .nav.solid { background: rgba(9,9,11,.92); border-color: var(--border); backdrop-filter: blur(18px); }
 .nav-logo { display: flex; align-items: center; text-decoration: none; }
-.nav-logo svg { height: 22px; width: auto; display: block; }
+.nav-logo svg { height: 32px; width: auto; display: block; }
 
 /* PAGE */
 .page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
@@ -227,6 +227,12 @@ body {
 .proof-bento img {
   width: 100%; display: block;
   height: auto;
+}
+/* Segundo card: clipa o espaço vazio do fundo via aspect-ratio */
+.proof-bento-clip img {
+  aspect-ratio: 800 / 600;
+  object-fit: cover;
+  object-position: top center;
 }
 
 
@@ -571,8 +577,8 @@ body {
       <div class="proof-bento proof-bento-wide">
         <img src="../wa-1.png?v=2" alt="Conversa WhatsApp: Desde de novembro? Com certeza.">
       </div>
-      <div class="proof-bento proof-bento-wide">
-        <img src="../wa-2.png?v=2" alt="Conversa WhatsApp: Temos recebido contatos via WhatsApp diariamente">
+      <div class="proof-bento proof-bento-wide proof-bento-clip">
+        <img src="../wa-2.png?v=3" alt="Conversa WhatsApp: Temos recebido contatos via WhatsApp diariamente">
       </div>
 
     </div>
