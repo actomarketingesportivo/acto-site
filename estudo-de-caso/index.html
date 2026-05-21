@@ -519,6 +519,47 @@ vturb-smartplayer {
   .btn-cta { font-size: 15px; padding: 18px; }
 }
 </style>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '26728527180076407');
+fbq('track', 'PageView');
+
+// CAPI helper — envia evento também pelo servidor
+async function sendCAPI(eventName, customData) {
+  try {
+    await fetch('https://acto-capi.contato-actomarketing.workers.dev/api/events', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        events: [{
+          event_name: eventName,
+          event_time: Math.floor(Date.now() / 1000),
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data: {
+            client_user_agent: navigator.userAgent,
+            fbp: document.cookie.match(/_fbp=([^;]+)/)?.[1] || '',
+            fbc: document.cookie.match(/_fbc=([^;]+)/)?.[1] || '',
+          },
+          custom_data: customData || {},
+        }]
+      })
+    });
+  } catch(e) { /* silencioso */ }
+}
+
+// Dispara PageView via CAPI também
+sendCAPI('PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=26728527180076407&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
 </head>
 <body>
 
@@ -752,6 +793,9 @@ form.addEventListener('submit', async (e) => {
     if (res.ok) {
       form.style.display = 'none';
       successMsg.style.display = 'block';
+      // Dispara evento Lead no Pixel e via CAPI
+      fbq('track', 'Lead');
+      sendCAPI('Lead');
     } else { throw new Error(); }
   } catch {
     btn.disabled = false;
