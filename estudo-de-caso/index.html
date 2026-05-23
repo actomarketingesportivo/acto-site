@@ -554,8 +554,8 @@ async function sendCAPI(eventName, customData) {
   } catch(e) { /* silencioso */ }
 }
 
-// Dispara PageView via CAPI também
-sendCAPI('PageView');
+// Dispara PageView via CAPI após pixel ter tempo de setar _fbp
+setTimeout(() => sendCAPI('PageView'), 800);
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=26728527180076407&ev=PageView&noscript=1"/></noscript>
@@ -795,7 +795,8 @@ form.addEventListener('submit', async (e) => {
       successMsg.style.display = 'block';
       // Dispara evento Lead no Pixel e via CAPI
       fbq('track', 'Lead');
-      sendCAPI('Lead');
+      const fd = new FormData(form);
+      sendCAPI('Lead', { content_name: fd.get('name') || '' });
     } else { throw new Error(); }
   } catch {
     btn.disabled = false;
