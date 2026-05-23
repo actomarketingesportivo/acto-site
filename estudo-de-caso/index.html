@@ -704,6 +704,11 @@ src="https://www.facebook.com/tr?id=26728527180076407&ev=PageView&noscript=1"/><
           <textarea name="desafio" placeholder="Descreva brevemente o momento da sua academia..." required></textarea>
         </div>
         <input type="hidden" name="_source" value="estudo-de-caso-vsl">
+        <input type="hidden" name="utm_source" id="utm_source">
+        <input type="hidden" name="utm_medium" id="utm_medium">
+        <input type="hidden" name="utm_campaign" id="utm_campaign">
+        <input type="hidden" name="utm_content" id="utm_content">
+        <input type="hidden" name="utm_term" id="utm_term">
         <button type="submit" class="btn-cta" id="vsl-btn">Quero meu plano agora →</button>
       </form>
 
@@ -777,6 +782,17 @@ const countObs = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.m-val[data-count]').forEach(el => countObs.observe(el));
 
+// Captura UTMs da URL e preenche campos ocultos
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(key => {
+    const el = document.getElementById(key);
+    if (el && params.get(key)) el.value = params.get(key);
+  });
+})();
+
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyS9iVSNbKCp-rxzaMEgHLcHIMnSKpPOzuJn3Rv7Z7jl2q6OoQgl3Saxmuh-gqFhU-S/exec';
+
 const form = document.getElementById('vsl-form');
 const btn = document.getElementById('vsl-btn');
 const successMsg = document.getElementById('success-msg');
@@ -796,7 +812,13 @@ form.addEventListener('submit', async (e) => {
       // Dispara evento Lead no Pixel e via CAPI
       fbq('track', 'Lead');
       const fd = new FormData(form);
-      sendCAPI('Lead', { content_name: fd.get('name') || '' });
+      sendCAPI('Lead', { content_name: fd.get('nome') || '' });
+      // Envia para Google Sheets
+      const sheetData = {};
+      for (let [k, v] of fd.entries()) sheetData[k] = v;
+      sheetData.pagina = window.location.href;
+      sheetData.data = new Date().toLocaleString('pt-BR');
+      fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(sheetData) }).catch(() => {});
     } else { throw new Error(); }
   } catch {
     btn.disabled = false;
