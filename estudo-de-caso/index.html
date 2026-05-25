@@ -98,10 +98,23 @@ body {
   margin-bottom: 32px;
 }
 .hero-h1 {
-  font-size: clamp(22px, 2.2vw, 32px);
-  font-weight: 900; line-height: 1.15;
-  letter-spacing: -0.5px; color: var(--text);
+  font-size: clamp(26px, 2.8vw, 42px);
+  font-weight: 900; line-height: 1.12;
+  letter-spacing: -1px; color: var(--text);
   margin-bottom: 20px;
+}
+.video-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .03em;
+  background: rgba(255,255,255,.04);
 }
 .hero-sub {
   font-size: 18px; color: var(--sub);
@@ -593,7 +606,7 @@ src="https://www.facebook.com/tr?id=26728527180076407&ev=PageView&noscript=1"/><
     </div>
 
     <div class="hero-video-col rv">
-      <p style="text-align:center; font-size:14px; font-weight:600; color:rgba(255,255,255,.6); margin-bottom:12px; letter-spacing:.03em;">Ligue o som e assista ao vídeo abaixo 🔊</p>
+      <p style="text-align:center; margin-bottom:4px;"><span class="video-cta">🔊 Ligue o som e assista ao vídeo abaixo</span></p>
       <div class="video-wrap">
         <vturb-smartplayer id="vid-6a0c560d284f6ad1aebfb2d3" style="display:block;width:100%;height:100%;"></vturb-smartplayer>
         <script type="text/javascript">
