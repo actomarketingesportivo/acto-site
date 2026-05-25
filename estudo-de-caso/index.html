@@ -818,7 +818,7 @@ form.addEventListener('submit', async (e) => {
       for (let [k, v] of fd.entries()) sheetData[k] = v;
       sheetData.pagina = window.location.href;
       sheetData.data = new Date().toLocaleString('pt-BR');
-      fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(sheetData) }).catch(() => {});
+      fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(sheetData), mode: 'no-cors' }).catch(() => {});
     } else { throw new Error(); }
   } catch {
     btn.disabled = false;
