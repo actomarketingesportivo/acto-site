@@ -836,6 +836,7 @@ form.addEventListener('submit', async (e) => {
       sheetData.pagina = window.location.href;
       sheetData.data = new Date().toLocaleString('pt-BR');
       fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(sheetData), mode: 'no-cors' }).catch(() => {});
+      fetch('http://2.25.170.161:5678/webhook/54044c35-b389-4889-ac96-655eaaefe788', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sheetData) }).catch(() => {});
     } else { throw new Error(); }
   } catch {
     btn.disabled = false;
