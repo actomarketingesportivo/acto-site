@@ -15,10 +15,20 @@
  */
 
 const CAPI_ENDPOINT = 'https://graph.facebook.com/v19.0';
+const N8N_WEBHOOK = 'http://2.25.170.161:5678/webhook/54044c35-b389-4889-ac96-655eaaefe788';
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { headers: corsHeaders('https://actomarketing.com.br') });
+    }
+
+    // Recebe lead do site e repassa para o N8n
+    if (request.method === 'POST' && url.pathname === '/api/lead') {
+      return handleLead(request);
+    }
 
     // Só intercepta POST em /api/events
     if (request.method === 'POST' && url.pathname === '/api/events') {
@@ -29,6 +39,34 @@ export default {
     return fetch(request);
   },
 };
+
+function corsHeaders(origin) {
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+}
+
+async function handleLead(request) {
+  const cors = corsHeaders('https://actomarketing.com.br');
+  try {
+    const body = await request.json();
+    await fetch(N8N_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    return new Response(JSON.stringify({ status: 'ok' }), {
+      headers: { ...cors, 'Content-Type': 'application/json' },
+    });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: 500,
+      headers: { ...cors, 'Content-Type': 'application/json' },
+    });
+  }
+}
 
 async function handleCAPIEvent(request, env) {
   // Cabeçalhos CORS para o pixel do browser conseguir enviar
