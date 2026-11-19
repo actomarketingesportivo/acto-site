@@ -149,23 +149,29 @@ footer a{text-decoration:none;color:var(--muted)}
 /* ================= Computador ================= */
 @media (min-width:980px){
   .wrap{padding:0 32px}
-  .hero{padding:30px 0 24px;display:flex}
+  .wrap{max-width:1280px}
+  .hero{min-height:100vh;min-height:100svh;padding:34px 0 44px;display:flex}
   .hero > .wrap{display:flex;flex-direction:column}
-  .logo{width:92px}
-  .hero-grid{flex:1;grid-template-columns:minmax(0,1fr) 420px;align-items:center;gap:48px;margin-top:56px}
-  .hero-copy{max-width:560px}
-  .eyebrow{font-size:13px}
-  .hero h1{font-size:54px;margin:18px 0 20px}
-  .sub{font-size:19px}
+  .logo{width:104px}
+  .hero-grid{flex:1;grid-template-columns:minmax(0,1fr) 500px;align-items:center;gap:72px;margin-top:0}
+  .hero-copy{max-width:780px}
+  .eyebrow{font-size:14px}
+  .hero h1{font-size:clamp(54px,5.2vw,80px);margin:22px 0 26px;max-width:none}
+  .sub{font-size:21px;max-width:30em}
+  .form-card{padding:34px 32px 28px}
+  .field{margin-bottom:14px}
+  .field input,.field select{font-size:18px;padding:19px 18px;border-radius:13px}
+  .row2{gap:14px}
+  .row2 .field select{font-size:17px;padding-left:16px}
+  .form-card .btn{font-size:16px;padding:23px 20px;margin-top:8px;border-radius:14px}
+  .form-card .note{font-size:14px}
   .photo{display:none}
   .photo-desk{display:block;position:absolute;left:50%;top:-70px;width:400px;transform:translateX(-46%);z-index:0}
   .hero-copy{align-self:center}
-  .form-card{padding:26px 24px 22px}
-  .cases{padding:64px 0 80px}
+  .cases{padding:90px 0 80px}
   .case-grid{grid-template-columns:1fr 1fr;gap:24px;align-items:start}
   .case{padding:26px 26px 28px}
 }
-@media (min-width:1180px){.hero h1{font-size:60px}}
 </style>
 </head>
 <body>
